@@ -14,7 +14,8 @@ function resolveWalletAddress(input?: string): string {
   if (typeof window === "undefined") return "";
   try {
     const sessionWallet = JSON.parse(localStorage.getItem("singulai_wallet") || "null");
-    return (sessionWallet?.walletAddress || sessionWallet?.address || "").toString();
+    const raw = (sessionWallet?.walletAddress || sessionWallet?.address || "").toString();
+    return raw.replace(/^"|"$/g, "");
   } catch {
     return "";
   }

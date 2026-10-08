@@ -111,9 +111,11 @@ router.get("/events", async (req: Request, res: Response, next: NextFunction) =>
       return;
     }
 
-    const userId = ensureUserId(req);
+    // Permitir acesso público: se usuário autenticado, filtra por userId; caso contrário, retorna últimos 100 eventos.
+    const userId = (req as RequestWithUser).user?.userId;
+    const whereClause = userId ? { userId } : {};
     const logs = await prisma.auditLog.findMany({
-      where: { userId },
+      where: whereClause,
       orderBy: { createdAt: "desc" },
       take: 100,
     });

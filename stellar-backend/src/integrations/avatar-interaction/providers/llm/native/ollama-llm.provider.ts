@@ -6,6 +6,7 @@ export type OllamaProviderConfig = {
   endpoint?: string;
   model?: string;
   timeoutMs?: number;
+  keepAlive?: string;
 };
 
 export class OllamaLlmProvider implements LlmProvider {
@@ -14,18 +15,34 @@ export class OllamaLlmProvider implements LlmProvider {
   constructor(private readonly config: OllamaProviderConfig = {}) {}
 
   async generate(request: LlmRequest): Promise<LlmResponse> {
-    const endpoint = this.config.endpoint || "http://127.0.0.1:11434/api/generate";
-    const model = this.config.model || request.modelId || "llama3.1:8b";
+    const endpoint =
+      this.config.endpoint || "http://127.0.0.1:11434/api/chat";
+
+    const model =
+      this.config.model || request.modelId || "mistral:latest";
+
+    const systemPrompt =
+      typeof request.metadata?.systemPrompt === "string"
+        ? request.metadata.systemPrompt
+        : undefined;
+
+    const messages = [
+      ...(systemPrompt
+        ? [{ role: "system", content: systemPrompt }]
+        : []),
+      { role: "user", content: request.message },
+    ];
 
     const response = await axios.post(
       endpoint,
       {
         model,
-        prompt: request.message,
+        messages,
         stream: false,
+        keep_alive: this.config.keepAlive || "30m",
       },
       {
-        timeout: this.config.timeoutMs ?? 15000,
+        timeout: this.config.timeoutMs ?? 180000,
         headers: {
           "Content-Type": "application/json",
         },
@@ -33,15 +50,19 @@ export class OllamaLlmProvider implements LlmProvider {
     );
 
     const data = response.data as {
-      response?: string;
+      message?: {
+        role?: string;
+        content?: string;
+      };
+      model?: string;
       eval_count?: number;
       prompt_eval_count?: number;
     };
 
     return {
-      text: (data.response || "").trim(),
+      text: (data.message?.content || "").trim(),
       provider: "native",
-      model,
+      model: data.model || model,
       usage: {
         promptTokens: data.prompt_eval_count,
         completionTokens: data.eval_count,

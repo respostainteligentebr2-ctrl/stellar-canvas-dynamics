@@ -40,3 +40,4 @@ export function loadDeployerKeypair(): Keypair {
 
   return Keypair.fromSecretKey(Uint8Array.from(secretArray));
 }
+export const connection = new Connection(clusterApiUrl('devnet'));

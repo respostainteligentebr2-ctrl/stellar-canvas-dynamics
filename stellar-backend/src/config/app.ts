@@ -6,12 +6,34 @@ import rateLimit from "express-rate-limit";
 import { setupMiddlewares } from "./express-setup.js";
 import setupRoutes from "../api/routes/index.js";
 import errorHandler from "../api/middlewares/errorHandler.js";
+import { OllamaLlmProvider } from "../integrations/avatar-interaction/providers/llm/native/ollama-llm.provider.js";
+import { setAvatarProviders } from "../integrations/avatar-interaction/registry/provider-registry.js";
 
 /**
  * Create and configure Express application
  */
 function createApp(): Express {
   const app = express();
+
+  const aiProvider = (process.env.AI_PROVIDER || "ollama").toLowerCase();
+
+  if (aiProvider === "ollama") {
+    const timeoutMs = Number(process.env.OLLAMA_TIMEOUT_MS);
+
+    setAvatarProviders({
+      llm: new OllamaLlmProvider({
+        endpoint:
+          process.env.OLLAMA_ENDPOINT ||
+          "http://127.0.0.1:11434/api/chat",
+        model: process.env.OLLAMA_MODEL || "mistral:latest",
+        timeoutMs:
+          Number.isFinite(timeoutMs) && timeoutMs > 0
+            ? timeoutMs
+            : 180000,
+        keepAlive: process.env.OLLAMA_KEEP_ALIVE || "30m",
+      }),
+    });
+  }
 
   // Trust proxy (important for rate limiting behind Nginx)
   app.set("trust proxy", 1);
