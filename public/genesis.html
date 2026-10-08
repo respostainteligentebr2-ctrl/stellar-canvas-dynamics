@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SINGUL AI</title>
+    <meta name="description" content="Sovereign intelligence for identity, memory, authorized context, and digital continuity.">
+    <link rel="canonical" href="https://app.singdoc.site/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SINGUL AI">
+    <meta property="og:title" content="SINGUL AI">
+    <meta property="og:description" content="Sovereign intelligence for identity, memory, authorized context, and digital continuity.">
+    <meta property="og:url" content="https://app.singdoc.site/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SINGUL AI">
+    <meta name="twitter:description" content="Sovereign intelligence for identity, memory, authorized context, and digital continuity.">
+    <link rel="stylesheet" href="/tailwind.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/singulai-favicon.ico">
+    <link rel="stylesheet" href="genesis.css">
+</head>
+<body class="genesis-page bg-black text-white selection:bg-cyan-500 selection:text-black">
+    <div id="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <div id="webgl-container"></div>
+
+    <header id="genesis-header" class="genesis-header">
+        <div class="genesis-header-inner">
+            <a href="/?section=modules" id="back-btn" class="genesis-brand" aria-label="SingulAI home">
+                <img src="/singulai-logo-horizontal.png" alt="SingulAI" class="genesis-logo">
+            </a>
+            <nav id="genesis-navigation" class="genesis-navigation" aria-label="Primary navigation">
+                <button id="genesis-nav-toggle" class="genesis-nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="genesis-nav-links">
+                    <span class="genesis-nav-toggle-label">Menu</span>
+                    <span class="genesis-nav-toggle-icon" aria-hidden="true"><span></span><span></span></span>
+                </button>
+                <div id="genesis-nav-links" class="genesis-nav-links">
+                    <a href="#origins" data-section-target="#origins">Origins</a>
+                    <a href="#horizontal-sec" data-section-target="#horizontal-sec">Sovereignty</a>
+                    <a href="#rupture" data-section-target="#rupture">Rupture</a>
+                    <a href="#autonomy" data-section-target="#autonomy">Architecture</a>
+                    <a href="/onboarding.html">Access</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="audio-control fixed bottom-6 md:bottom-10 left-6 md:left-10 z-[100]">
+        <button id="audio-toggle" class="group flex items-center gap-4 text-[10px] font-mono uppercase tracking-widest text-white/40 hover:text-white transition-colors">
+            <span id="audio-status">Audio: Off</span>
+            <div class="w-10 h-[1px] bg-white/20 relative overflow-hidden">
+                <div id="audio-progress" class="absolute inset-0 bg-cyan-400 translate-x-[-100%]"></div>
+            </div>
+        </button>
+    </div>
+
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+            
+            <section id="origins" class="h-screen flex items-center px-6 md:px-10 relative">
+                <div class="w-full max-w-[1400px] mx-auto">
+                    <div class="overflow-hidden mb-4">
+                        <span class="hero-tag block translate-y-full font-mono text-cyan-400 text-xs tracking-[0.4em] md:tracking-[0.8em] uppercase">The End of the Cloud Umbilical</span>
+                    </div>
+                    <h1 class="hero-title text-[clamp(2.5rem,10vw,14rem)] font-black leading-[0.85] tracking-tighter uppercase">
+                        DECENTRALIZE <br>
+                        <span class="ml-[2vw] md:ml-[5vw] text-outline-white text-transparent">EVERYTHING.</span>
+                    </h1>
+                </div>
+            </section>
+
+            <section id="horizontal-sec" class="h-screen overflow-hidden">
+                <div class="pin-container h-full flex items-center">
+                    <div class="horizontal-inner flex gap-[10vw] px-[10vw]">
+                        <div class="horizontal-item flex-none w-[85vw] md:w-[40vw] flex flex-col justify-center">
+                            <span class="text-3xl md:text-5xl font-black mb-4 md:mb-6">01 // Sovereignty</span>
+                            <p class="text-base md:text-xl text-white/40 font-light leading-relaxed">Your identity, memory and intelligence should remain under your control — not locked behind a corporate subscription.</p>
+                        </div>
+                        <div class="horizontal-item flex-none w-[85vw] md:w-[40vw] flex flex-col justify-center">
+                            <span class="text-3xl md:text-5xl font-black mb-4 md:mb-6">02 // Local Node</span>
+                            <p class="text-base md:text-xl text-white/40 font-light leading-relaxed">Local intelligence runs closer to its owner, reducing external dependency and preserving greater control over execution and context.</p>
+                        </div>
+                        <div class="horizontal-item flex-none w-[85vw] md:w-[40vw] flex flex-col justify-center">
+                            <span class="text-3xl md:text-5xl font-black mb-4 md:mb-6">03 // Genesis</span>
+                            <p class="text-base md:text-xl text-white/40 font-light leading-relaxed">Identity, memory, intent and digital legacy converge into a persistent cognitive architecture designed to preserve continuity without imitating or replacing the individual.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="rupture" class="min-h-screen py-20 md:py-40 px-6 md:px-10 flex flex-col items-center">
+                <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
+                    <div class="image-reveal-container aspect-[4/5] bg-black relative overflow-hidden order-2 md:order-1">
+                        <img src="/singulai-cognitive-core.png" alt="SingulAI Cognitive Core" class="h-full w-full object-contain">
+    <div class="absolute inset-x-0 bottom-0 z-10 px-5 pb-6 pt-20 md:px-8 md:pb-9 bg-gradient-to-t from-black/95 via-black/65 to-transparent pointer-events-none">
+      <h3 class="text-white text-lg md:text-2xl font-black uppercase leading-tight tracking-tight">
+        CONTINUITY, <span class="text-cyan-400">NOT REPLICATION.</span>
+      </h3>
+      <p class="mt-3 text-white/85 text-xs md:text-sm leading-relaxed max-w-md">
+        Identity, memory and intent evolve through authorized context — never as imitation or replacement.
+      </p>
+    </div>
+
+                    </div>
+                    <div class="flex flex-col gap-6 md:gap-8 order-1 md:order-2">
+                        <h2 class="text-4xl md:text-6xl font-black leading-none uppercase">The Cloud <br>is a <span class="text-cyan-400">Prison</span>.</h2>
+                        <p class="text-white/50 text-base md:text-lg leading-relaxed">
+                            Centralized intelligence concentrates identity, memory and context outside the user’s direct control. SingulAI establishes a sovereign architecture where intelligence, verified actions and digital continuity remain connected to the individual.
+                        </p>
+                        <div class="group flex items-center gap-4 md:gap-6 cursor-pointer">
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </div>
+                            <span class="font-mono text-xs uppercase tracking-widest">Read the Manifesto</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="autonomy" class="min-h-screen py-20 md:py-40 px-6 md:px-10 bg-white text-black">
+                <div class="w-full max-w-[1400px] mx-auto">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-12 md:mb-24 gap-6">
+                        <h3 class="text-[clamp(2rem,5vw,8rem)] font-black leading-[0.9] uppercase">The Architecture <br>of Freedom.</h3>
+                            <div class="font-mono text-[10px] uppercase tracking-widest leading-loose md:text-right">
+                                COGNITIVE_IDENTITY: PERSISTENT<br>MEMORY_GRAPH: CONTEXTUAL<br>SGL_PROTOCOL: VERIFIABLE
+                        </div>
+                    </div>
+                    
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-1 px-1 bg-black/5">
+                        <div class="bg-white p-8 md:p-12 border border-black/5 hover:bg-black hover:text-white transition-colors duration-500">
+                            <span class="block font-mono text-xs mb-6 md:mb-10 opacity-40">01_CORE</span>
+                            <h4 class="text-xl md:text-2xl font-bold mb-4">Neural Sovereignty</h4>
+                            <p class="text-sm opacity-60 leading-relaxed uppercase tracking-tighter">Identity, memory and cognitive interaction remain centered on the individual, preserving context, intent and authorized continuity.</p>
+                        </div>
+                        <div class="bg-white p-8 md:p-12 border border-black/5 hover:bg-black hover:text-white transition-colors duration-500">
+                            <span class="block font-mono text-xs mb-6 md:mb-10 opacity-40">02_EDGE</span>
+                            <h4 class="text-xl md:text-2xl font-bold mb-4">Edge Inference</h4>
+                            <p class="text-sm opacity-60 leading-relaxed uppercase tracking-tighter">Local intelligence keeps execution closer to its owner, reducing external dependency while preserving greater control over context and interaction.</p>
+                        </div>
+                        <div class="bg-white p-8 md:p-12 border border-black/5 hover:bg-black hover:text-white transition-colors duration-500">
+                            <span class="block font-mono text-xs mb-6 md:mb-10 opacity-40">03_MESH</span>
+                            <h4 class="text-xl md:text-2xl font-bold mb-4">Global Fabric</h4>
+                            <p class="text-sm opacity-60 leading-relaxed uppercase tracking-tighter">Identity, SGL, verification, memory and legacy layers operate as a connected architecture for persistent and authorized digital continuity.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="py-12 md:py-20 px-6 md:px-10 flex flex-col items-center gap-6 md:gap-8 border-t border-white/10 bg-black">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-10 w-full">
+                    <span class="text-xs font-mono opacity-20 uppercase tracking-[0.3em] md:tracking-[0.5em]">© 2026 // SINGULAI // SOVEREIGN INTELLIGENCE</span>
+                    <div class="flex gap-6 md:gap-8 text-[10px] font-mono opacity-40 uppercase tracking-widest">
+                        <span class="line-through opacity-50 cursor-not-allowed">X (Twitter)</span>
+                        <span class="line-through opacity-50 cursor-not-allowed">Discord</span>
+                        <span class="line-through opacity-50 cursor-not-allowed">GitHub</span>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center gap-2 text-white/20 text-[10px]">
+                    <p>Desenvolvido por - <a href="https://rrv.digital" target="_blank" rel="noopener noreferrer">rrv.digital</a></p>
+                </div>
+                <div class="flex gap-4 mt-4 text-[7px] text-white/10 tracking-wider">
+                    <span>Guide (EN)</span>
+                    <span class="text-white/10">|</span>
+                    <span>Guia (PT)</span>
+                </div>
+                <p class="text-[7px] text-white/10 mt-3 tracking-wider">INPI 942284933</p>
+            </footer>
+        </div>
+    </main>
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script defer src="lucide-subset.js"></script>
+    <script defer src="genesis.js"></script>
+
+        <!-- Floating access button -->
+  <a href="/onboarding.html" class="singulai-fab" id="singulai-fab"><span id="txt-fab">A C E S S O</span></a>
+
+</body>
+</html>
