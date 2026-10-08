@@ -1,5 +1,3 @@
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
 import dotenv from "dotenv";
 import path from "path";
 
