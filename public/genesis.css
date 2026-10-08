@@ -449,23 +449,4 @@ body::-webkit-scrollbar {
     .genesis-nav-toggle-icon span, #singulai-fab { transition: none; }
     #singulai-fab { animation: none !important; }
 
-    #horizontal-sec {
-        height: 100vh;
-        height: 100svh;
-        overflow-x: auto;
-        overflow-y: hidden;
-        overscroll-behavior-x: contain;
-        scrollbar-width: thin;
-    }
-
-    #horizontal-sec .pin-container { width: max-content; min-width: 100%; height: 100%; }
-
-    #horizontal-sec .horizontal-inner {
-        width: max-content;
-        min-width: 100%;
-        flex-direction: row;
-        transform: none !important;
-    }
-
-    #horizontal-sec .horizontal-item { flex: none; }
 }

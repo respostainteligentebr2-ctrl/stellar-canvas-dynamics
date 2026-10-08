@@ -369,29 +369,31 @@ class SingulAIGenesis {
     initGSAP() {
         gsap.registerPlugin(ScrollTrigger);
 
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reducedMotion) {
             gsap.set('.hero-tag', { y: 0 });
             gsap.set('.hero-title', { opacity: 1, y: 0 });
             document.querySelector('.image-reveal-container')?.classList.add('revealed');
-            return;
+        } else {
+            const heroTl = gsap.timeline();
+            heroTl.to('.hero-tag', { y: 0, duration: 1, ease: 'expo.out' })
+                  .to('.hero-title', { opacity: 1, y: 0, duration: 1.5, ease: 'expo.out' }, '-=0.8');
         }
-
-        const heroTl = gsap.timeline();
-        heroTl.to('.hero-tag', { y: 0, duration: 1, ease: 'expo.out' })
-              .to('.hero-title', { opacity: 1, y: 0, duration: 1.5, ease: 'expo.out' }, '-=0.8');
 
         const horizontalSec = document.getElementById('horizontal-sec');
         const horizontalInner = document.querySelector('.horizontal-inner');
         
         if (horizontalSec && horizontalInner) {
+            const getHorizontalDistance = () => Math.max(horizontalInner.scrollWidth - window.innerWidth, 0);
             gsap.to(horizontalInner, {
-                x: () => -(horizontalInner.scrollWidth - window.innerWidth),
+                x: () => -getHorizontalDistance(),
                 ease: 'none',
                 scrollTrigger: {
                     trigger: horizontalSec,
                     pin: true,
                     scrub: 1,
-                    end: () => '+=' + horizontalInner.scrollWidth,
+                    end: () => '+=' + getHorizontalDistance(),
+                    invalidateOnRefresh: true,
                     onUpdate: (self) => {
                         if (this.renderer) this.renderer.updateIntensity(self.progress * 2);
                     }
@@ -410,17 +412,23 @@ class SingulAIGenesis {
             }
         });
 
-        gsap.utils.toArray('.hero-title span').forEach(el => {
-            gsap.to(el, {
-                x: 100,
-                scrollTrigger: {
-                    trigger: '#origins',
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: true
-                }
+        if (!reducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            gsap.utils.toArray('.hero-title span').forEach(el => {
+                gsap.to(el, {
+                    x: 100,
+                    scrollTrigger: {
+                        trigger: '#origins',
+                        start: 'top top',
+                        end: 'bottom top',
+                        scrub: true
+                    }
+                });
             });
-        });
+        }
+
+        if (document.fonts?.ready) {
+            document.fonts.ready.then(() => ScrollTrigger.refresh());
+        }
     }
 
     bindEvents() {
